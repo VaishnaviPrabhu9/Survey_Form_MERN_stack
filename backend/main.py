@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from routes import router
-
+import os
 app = FastAPI()
 
 # Enable CORS for frontend requests
@@ -17,4 +17,5 @@ app.add_middleware(
 app.include_router(router)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
